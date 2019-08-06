@@ -1,25 +1,38 @@
 import React from 'react';
-import { StyleSheet, Text, Image, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, Image } from 'react-native';
 import { Container, Content, Header, Form, Input, Item, Button, Label } from 'native-base'
 import { AuthSession } from 'expo';
+import {AsyncStorage} from 'react-native';
+
+
+let testArray = ['Room 1', 'Room 2', 'Room 3', 'Room 4'];
+AsyncStorage.setItem('UID123', JSON.stringify(testArray), () => {
+  console.log(testArray)
+});
+
+AsyncStorage.getItem('UID123', (err, result) => {
+  let getValue = JSON.parse(result)
+  console.log(getValue)
+});
+
 
 export default ({ history }) => (
-    <Container style={styles.container}>
+  <Container style={styles.container}>
         
-        <Image style={styles.image} source={require('../assets/ghentbox_logo.png')} />
+    <Image style={styles.image} source={require('../assets/ghentbox_logo.png')} />
 
-        <Form>
-          <Button style={styles.ButtonGreen} onPress={() => history.push("/login")}>
-            <Text style={styles.Text}>{test[2]}</Text>
-          </Button>
-                
-          <Button style={styles.ButtonRed} onPress={() => history.push("/register")}>
-            <Text style={styles.Text}>Register</Text>
-          </Button>
-        </Form>
+    <Form>
+      <Button style={styles.ButtonGreen} onPress={() => history.push("/login")}>
+        <Text style={styles.Text}>login</Text>
+      </Button>
             
-      </Container>
-    );
+      <Button style={styles.ButtonRed} onPress={() => history.push("/register")}>
+        <Text style={styles.Text}>Register</Text>
+      </Button>
+    </Form>
+            
+  </Container>
+);
 
 const styles = StyleSheet.create({
     container: {
@@ -73,6 +86,3 @@ const styles = StyleSheet.create({
   }
 });
 
-let testArray = ['Room 1', 'Room 2', 'Room 3', 'Room 4'];
-AsyncStorage.setItem('testArray', JSON.stringify(testArray));
-let test = AsyncStorage.getItem('testArray');
