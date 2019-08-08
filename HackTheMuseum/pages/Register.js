@@ -1,17 +1,23 @@
 import React from 'react';
-import { StyleSheet, Text, Image,} from 'react-native';
+import { StyleSheet, Text, Image, } from 'react-native';
 import { Container, Content, Header, Form, Input, Item, Button, Label } from 'native-base'
 import FontAwesome from 'react-native-vector-icons/FontAwesome5';
 
-export default ({ history }) => (
 
+export default class Register extends React.Component {
+
+static navigationOptions = {
+  headerStyle: {
+    backgroundColor: '#FFDD59',
+    color: 'white',
+    shadowOpacity: 0,
+    elevation: 0,
+  },
+}
+
+  render() {
+    return (
     <Container style={styles.container}>
-        
-        <FontAwesome
-          style={styles.backBtn}
-          name="arrow-left"
-          onPress={() => history.push("/")}>
-        </FontAwesome>
     
         <Image style={styles.image} source={require('../assets/ghentbox_logo.png')} />
         
@@ -48,85 +54,78 @@ export default ({ history }) => (
             />
           </Item>
 
-          <Button style={styles.ButtonRed} onPress={() => history.push("/museums")}>
-            <Text style={styles.Text}>Register</Text>
+          <Button style={styles.ButtonRed}>
+            <Text style={styles.Text} onPress={() => this.props.navigation.navigate('Museums')}>Register</Text>
           </Button>
         </Form>
     
-        <Text style={styles.textLink} onPress={() => history.push("/login")}>I've an account</Text>
+        <Text style={styles.textLink} onPress={() => this.props.navigation.navigate('Login')}>I've an account</Text>
     
             
     </Container>
-)
+    );
+  }
+}
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#FFDD59',
-        justifyContent: 'center',
-        width: "100%",
-        textAlign: 'center',
-    },
-
-    backBtn: {
-      fontSize: 60,
-        position: 'absolute',
-        top: 50,
-        left: 15,
-        backgroundColor: '#FFDD59',
-        color: 'white',
-    },
-
-    image: {
-        height: 190,
-        width: "80%",
-        marginLeft: "10%",
-        marginBottom: 80,
-    
-    },
-
-    Item: {
-        borderColor: 'white',
-        borderBottomWidth: 8,
-        borderRadius: 0,
-        color: 'white',
-        width: '80%',
-        marginLeft: '10%',
-        marginTop: 10
-    },
-
-    label: {
-        color: 'white',
-        fontWeight: 'bold',
-        textTransform: 'uppercase',
-    },
-  
-    ButtonRed: {
-        backgroundColor: '#EE5732',
-        color: '#fff',
-        width: '80%',
-        marginTop: 5,
-        marginLeft: '10%',
-        paddingTop: 15,
-        paddingBottom: 15,
-        elevation: 0,
-        borderRadius: 20
-  },
-
-  Text: {
-      color: '#fff',
-      textTransform: 'uppercase',
+  container: {
+      flex: 1,
+      backgroundColor: '#FFDD59',
+      justifyContent: 'center',
+      width: "100%",
       textAlign: 'center',
-      fontWeight: 'bold',
-      fontSize: 24,
-      marginLeft: "auto",
-      marginRight: "auto",
   },
 
-  textLink: {
-    color: '#3C40C6',
-    marginTop: 10,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-  }
+  image: {
+      height: 190,
+      width: "80%",
+      marginLeft: "10%",
+      marginBottom: 80,
+  
+  },
+
+  Item: {
+      borderColor: 'white',
+      borderBottomWidth: 8,
+      borderRadius: 0,
+      color: 'white',
+      width: '80%',
+      marginLeft: '10%',
+      marginTop: 10
+  },
+
+  label: {
+      color: 'white',
+      fontWeight: 'bold',
+      textTransform: 'uppercase',
+  },
+
+  ButtonRed: {
+      backgroundColor: '#EE5732',
+      color: '#fff',
+      width: '80%',
+      marginTop: 5,
+      marginLeft: '10%',
+      paddingTop: 15,
+      paddingBottom: 15,
+      elevation: 0,
+      borderRadius: 20
+},
+
+Text: {
+    color: '#fff',
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 24,
+    marginLeft: "auto",
+    marginRight: "auto",
+},
+
+textLink: {
+  color: '#3C40C6',
+  marginTop: 10,
+  marginLeft: 'auto',
+  marginRight: 'auto',
+}
 });

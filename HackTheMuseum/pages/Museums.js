@@ -3,30 +3,39 @@ import { StyleSheet, Text, Image, View} from 'react-native';
 import { Container, Content, Header, Form, Input, Item, Button, Label } from 'native-base'
 
 
-export default ({ history }) => (
+export default class Museums extends React.Component {
+    
+    static navigationOptions = {
+        header: null
+    }
+
+  render() {
+    return (
     <Container style={styles.container}>
         <Text style={styles.text}>In wich museum are you?</Text>
 
         <View style={styles.viewParent}>
-            <Button style={styles.firstBtn} onPress={() => history.push("/room")}>
-                <Text style={styles.text}>MSK</Text>
+            <Button style={styles.firstBtn}>
+                <Text style={styles.text} onPress={() => this.props.navigation.navigate('Room')}>MSK</Text>
             </Button>
 
-            <Button style={styles.firstBtn} onPress={() => history.push("/room")}>
-                <Text style={styles.text}>MAS</Text>
+            <Button style={styles.firstBtn}>
+                <Text style={styles.text} onPress={() => this.props.navigation.navigate('Room')}>MAS</Text>
             </Button>
 
-            <Button style={styles.firstBtn} onPress={() => history.push("/room")}>
-                <Text style={styles.text}>STAM</Text>
+            <Button style={styles.firstBtn}>
+                <Text style={styles.text} onPress={() => this.props.navigation.navigate('Room')}>STAM</Text>
             </Button>
 
-            <Button style={styles.firstBtn} onPress={() => history.push("/room")}>
-                <Text style={styles.text}>SMAK</Text>
+            <Button style={styles.firstBtn}>
+                <Text style={styles.text} onPress={() => this.props.navigation.navigate('Room')}>SMAK</Text>
             </Button>
         </View>
 
     </Container>
-);
+    );
+  }
+}
 
 const styles = StyleSheet.create({
     container: {

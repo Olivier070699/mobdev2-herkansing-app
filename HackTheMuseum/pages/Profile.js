@@ -1,20 +1,19 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { StyleSheet, View, Text, Button } from 'react-native';
 
-import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements'
 
-export default ({ history }) => (
-    <View>
-        <Text
-            onPress={() => history.push("/museums")}>
+export default class Profile extends React.Component {
+
+  render() {
+    return (
+    <View style={styles.view}>
+        <Text>
             Museums
         </Text>
-        <Text
-            onPress={() => history.push("/room")}>
+        <Text>
             Rooms
         </Text>
-        <Text
-            onPress={() => history.push("/profile")}>
+        <Text>
             Profile
         </Text>
         
@@ -23,4 +22,15 @@ export default ({ history }) => (
 
         <Text>Settings -> wachtwoord wijzigen</Text>
     </View>
-);
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+    view: {
+        flex: 1,
+        backgroundColor: '#3C40C6',
+        justifyContent: 'center',
+        width: "100%",
+    },
+});
