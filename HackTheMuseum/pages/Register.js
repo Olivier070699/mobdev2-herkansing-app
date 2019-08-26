@@ -54,8 +54,8 @@ static navigationOptions = {
             />
           </Item>
 
-          <Button style={styles.ButtonRed}>
-            <Text style={styles.Text} onPress={() => this.props.navigation.navigate('Museums')}>Register</Text>
+          <Button style={styles.ButtonRed} onPress={() => this.props.navigation.navigate('Museums')}>
+            <Text style={styles.Text}>Register</Text>
           </Button>
         </Form>
     

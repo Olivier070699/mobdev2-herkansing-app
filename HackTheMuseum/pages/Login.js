@@ -46,8 +46,8 @@ export default class Login extends React.Component {
             </Item>
             
 
-            <Button style={styles.ButtonGreen}>
-              <Text style={styles.Text} onPress={() => this.props.navigation.navigate('Museums')}>Login</Text>
+            <Button style={styles.ButtonGreen} onPress={() => this.props.navigation.navigate('Museums')}>
+              <Text style={styles.Text} >Login</Text>
             </Button>
           </Form>
 

@@ -10,8 +10,12 @@ export default class Room extends React.Component {
     }
   }
   static navigationOptions = {
-  header: null
-  }
+    headerStyle: {
+      backgroundColor: '#EE5732',
+      shadowOpacity: 0,
+      elevation: 0,
+    },
+}
   
   componentWillMount(){
   this.getRoomsFromAPI()
