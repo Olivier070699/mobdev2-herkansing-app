@@ -1,66 +1,32 @@
 import React from 'react';
-import { StyleSheet, Listview, Text, Image, FlatList, View, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, Image, FlatList, View} from 'react-native';
 import { Container, Content, Header, Form, Input, Item, Button, Label, } from 'native-base'
 import { AuthSession } from 'expo';
-import axios from 'axios'
+import {AsyncStorage} from 'react-native';
+
 
 export default class Home extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      data: []
-    };
-  }
   static navigationOptions = {
     header: null
-  }
-   
-  componentWillMount(){
-    //fetch('http://192.168.0.101:8080/api/v1/museums')
-    //fetch('https://facebook.github.io/react-native/movies.json')
-
-    fetch('http://192.168.0.101:8080/api/v1/museums', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      }
-    }) 
-      .then((response) => {
-        console.log('test');
-        console.log(JSON.stringify(response.json()));
-        return response.json()
-      })
-      .then((data) => { 
-        console.log(data);
-      }).catch((error) => {
-        console.log(error)
-      })
-    
-
-    //   .then((response) => response.text())
-    //   .then((responseJson) => {
-    //     console.log(responseJson);
-    //   })
-    //   .catch((error) => {
-    //   console.log(error);
-    // })
-    
-  }
- 
-
+}
   render() {
-    return ( 
-     
+    return (
+  
+      <Container style={styles.container}>
         
-      <View>
-        {this.state.data.map(el => {
-          <Text>
-            {el.name}
-          </Text>
-        })}
-      </View>
-      
+      <Image style={styles.image} source={require('../assets/ghentbox_logo.png')} />
+  
+      <Form>
+        <Button style={styles.ButtonGreen} onPress={() => this.props.navigation.navigate('Login')}>
+          <Text style={styles.Text}>login</Text>
+        </Button>
+              
+        <Button style={styles.ButtonRed} onPress={() => this.props.navigation.navigate('Register')}>
+          <Text style={styles.Text}>Register</Text>
+        </Button>
+      </Form>
+              
+    </Container>
     );
   }
 }

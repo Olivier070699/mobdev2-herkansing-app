@@ -24,7 +24,7 @@ class App extends React.Component {
 }
 
 const NavStack = createStackNavigator({
-  Home: Home,
+  Home: Museums,
   Museums: Museums,
   Login: Login,
   Register: Register,

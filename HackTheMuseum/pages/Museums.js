@@ -1,73 +1,130 @@
-import React from 'react';
-import { StyleSheet, Text, Image, View} from 'react-native';
-import { Container, Content, Header, Form, Input, Item, Button, Label } from 'native-base'
+import React from 'react'
+import { StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 
 
 export default class Museums extends React.Component {
-    
-    static navigationOptions = {
-        header: null
+constructor() {
+    super();
+    this.state = {
+      data: []
     }
+  }
+  static navigationOptions = {
+    header: null
+  }
+   
+  componentWillMount(){
+    this.getMuseumsFromAPI()
+  }
+
+  getMuseumsFromAPI = async() => {
+  const url = "http://192.168.5.135:8080/api/v1/museums"
+
+  await fetch(url, {
+      method: 'GET',
+      headers:{
+      'Content-Type': 'application/json'
+      }
+  })
+  .then(res => res.json())
+  .then(async(response) => await this.setState({
+      data: response
+  }))
+  .catch(error => console.error('Error:', error))
+  }
 
   render() {
-    return (
-    <Container style={styles.container}>
-        <Text style={styles.text}>In wich museum are you?</Text>
-
-        <View style={styles.viewParent}>
-            <Button style={styles.firstBtn}>
-                <Text style={styles.text} onPress={() => this.props.navigation.navigate('Room')}>MSK</Text>
-            </Button>
-
-            <Button style={styles.firstBtn}>
-                <Text style={styles.text} onPress={() => this.props.navigation.navigate('Room')}>MAS</Text>
-            </Button>
-
-            <Button style={styles.firstBtn}>
-                <Text style={styles.text} onPress={() => this.props.navigation.navigate('Room')}>STAM</Text>
-            </Button>
-
-            <Button style={styles.firstBtn}>
-                <Text style={styles.text} onPress={() => this.props.navigation.navigate('Room')}>SMAK</Text>
-            </Button>
+    return ( 
+      <View style={styles.container}>
+        <Text style={styles.heading}>In welk museum ben je?</Text>
+        <View style={styles.tileContainer}>
+          {Array.from(this.state.data).map(museum => (
+            <TouchableOpacity style={styles.tile} key={museum.id} onPress={() => this.props.navigation.navigate('Room', {museum_id: museum.id})}>
+              <Text key={museum.id} style={styles.text}>
+                {museum.name}
+              </Text>
+            </TouchableOpacity>
+          ))}
         </View>
-
-    </Container>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#3C40C6',
-        justifyContent: 'center',
-        width: "100%",
-    },
+  container: {
+      flex: 1,
+      backgroundColor: '#5856D6',
+      justifyContent: 'center',
+      width: "100%",
+  },
 
-    text: {
-        color: '#fff',
-        textTransform: 'uppercase',
-        fontWeight: 'bold',
-        fontSize: 24,
-        marginLeft: "auto",
-        marginRight: "auto",
-    },
+  image: {
+      height: 190,
+      width: "80%",
+      marginLeft: "10%",
+      marginBottom: 80,
+  
+  },
 
-    viewParent: {
-        width: '80%',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignContent: 'stretch',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
+  buttonGreen: {
+      backgroundColor: '#4CD964',
+      color: '#fff',
+      width: '80%',
+      marginTop: 30,
+      marginLeft: '10%',
+      paddingTop: 15,
+      paddingBottom: 15,
+      elevation: 0,
+      borderRadius: 20,
+      textAlign: 'center',
+      },
 
-    firstBtn: {
-        height: 120,
-        width: 120,
-        margin: 10,
-    },
+  buttonRed: {
+      backgroundColor: '#EE5732',
+      color: '#fff',
+      width: '80%',
+      marginTop: 5,
+      marginLeft: '10%',
+      paddingTop: 15,
+      paddingBottom: 15,
+      elevation: 0,
+      borderRadius: 20,
+      textAlign: 'center',
+  },
+
+  text: {
+      color: '#fff',
+      textTransform: 'uppercase',
+      fontWeight: 'bold',
+      fontSize: 24,
+      marginLeft: "auto",
+      marginRight: "auto",
+  },
+
+  heading: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 24,
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
+
+  tile: {
+    textAlign: 'center',
+    justifyContent: 'space-around',
+    width: 150,
+    height: 150,
+    backgroundColor: '#FFCC00',
+    margin: 6,
+  },
+
+  tileContainer:{
+    alignItems: 'center',
+    alignSelf: 'center',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
 });
